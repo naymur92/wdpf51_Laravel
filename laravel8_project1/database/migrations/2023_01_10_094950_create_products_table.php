@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ProductsMigration extends Migration
+class CreateProductsTable extends Migration
 {
   /**
    * Run the migrations.
@@ -14,10 +14,12 @@ class ProductsMigration extends Migration
   public function up()
   {
     Schema::create('products', function (Blueprint $table) {
-      $table->id();
-      $table->string('name', 50);
-      $table->string('details', 1500);
-      $table->double('price', 6, 2);
+      $table->smallIncrements('id');
+      $table->string('product_name', 50);
+      $table->string('product_details', 1500);
+      $table->double('product_price', 8, 2);
+      $table->string('product_image', 100);
+      $table->tinyInteger('product_category');
       $table->timestamps();
     });
   }
