@@ -250,7 +250,7 @@
                 <label class="form-label" for="_category">Product Category</label>
                 <div class="form-control-wrap ">
                   <div class="form-control-select">
-                    <select class="form-control" id="_category">
+                    <select class="form-control" name="product_category" id="_category">
                       <option value="" selected hidden>Select One</option>
                       @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->category_name }}</option>
