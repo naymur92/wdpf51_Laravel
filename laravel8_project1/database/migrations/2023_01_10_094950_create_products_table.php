@@ -18,8 +18,9 @@ class CreateProductsTable extends Migration
       $table->string('product_name', 50);
       $table->string('product_details', 1500);
       $table->double('product_price', 8, 2);
-      $table->string('product_image', 100);
+      $table->string('product_image', 100)->nullable();
       $table->tinyInteger('product_category');
+      $table->mediumInteger('product_stock');
       $table->timestamps();
     });
   }

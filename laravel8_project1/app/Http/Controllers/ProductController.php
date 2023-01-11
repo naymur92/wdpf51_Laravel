@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,7 +16,9 @@ class ProductController extends Controller
    */
   public function index()
   {
-    return view('backend.products.index');
+    $data['categories'] = Category::get();
+    $data['products'] = Product::orderBy('created_at', 'DESC')->get();
+    return view('backend.products.index', $data);
   }
 
   /**
@@ -22,10 +26,11 @@ class ProductController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function create()
-  {
-    //
-  }
+
+  // public function create()
+  // {
+  //   //
+  // }
 
   /**
    * Store a newly created resource in storage.
@@ -35,7 +40,17 @@ class ProductController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $data['product_name'] = request('product_name');
+    $data['product_details'] = request('product_details');
+    $data['product_price'] = request('product_price');
+    $data['product_stock'] = request('product_stock');
+    $data['product_category'] = request('product_category');
+    $data['product_image'] = 'no_image.jpg';
+    $data['created_at'] = date('Y-m-d H:i:s');
+
+    if (Product::insert($data)) {
+      return redirect('products');
+    }
   }
 
   /**

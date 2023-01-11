@@ -19,7 +19,8 @@ class ProductFactory extends Factory
       'product_details' => $this->faker->paragraph(),
       'product_price' => $this->faker->randomFloat($nbMaxDecimals = 1, $min = 50, $max = 5000),
       'product_image' => 'no_image.jpg',
-      'product_category' => $this->faker->randomDigit(),
+      'product_category' => $this->faker->randomDigitNot(0),
+      'product_stock' => $this->faker->randomNumber($nbDigits = 3, $strict = false),
     ];
   }
 }
