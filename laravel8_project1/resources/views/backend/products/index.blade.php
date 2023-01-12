@@ -142,11 +142,12 @@
                     </ul>
                   </div>
                 </div><!-- .nk-tb-item -->
-              @endforeach;
+              @endforeach
             </div><!-- .nk-tb-list -->
           </div>
           <div class="card-inner">
-            <div class="nk-block-between-md g-3">
+            {{ $products->links('vendor.pagination.bootstrap-4') }}
+            {{-- <div class="nk-block-between-md g-3">
               <div class="g">
                 <ul class="pagination justify-content-center justify-content-md-start">
                   <li class="page-item"><a class="page-link" href="#"><em
@@ -190,7 +191,7 @@
                   <div>OF 102</div>
                 </div>
               </div><!-- .pagination-goto -->
-            </div><!-- .nk-block-between -->
+            </div><!-- .nk-block-between --> --}}
           </div>
         </div>
       </div>
@@ -206,7 +207,7 @@
         </div>
       </div><!-- .nk-block-head -->
       <div class="nk-block">
-        <form action="{{ url('products') }}" method="post" enctype="multipart/form-data">
+        <form id="product_form" action="{{ url('products') }}" method="post" enctype="multipart/form-data">
           <div class="row g-3">
             @csrf
             <div class="col-12">
@@ -268,7 +269,9 @@
               </div>
             </div>
             <div class="col-12">
-              <button class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add New</span></button>
+              <button type="button" id="submit_btn" class="btn btn-primary"><em
+                  class="icon ni ni-plus"></em><span>Add
+                  New</span></button>
             </div>
           </div>
         </form>
@@ -276,3 +279,11 @@
     </div>
   </div>
 @endsection
+<script>
+  $(document).ready(function() {
+    $("#submit_btn").click(function() {
+      var form = $("#product_form");
+      alert(form.serialize());
+    });
+  });
+</script>

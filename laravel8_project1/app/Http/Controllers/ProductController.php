@@ -16,9 +16,9 @@ class ProductController extends Controller
    */
   public function index()
   {
-    $data['categories'] = Category::get();
-    $data['products'] = Product::orderBy('created_at', 'DESC')->get();
-    return view('backend.products.index', $data);
+    $categories = Category::get();
+    $products = Product::latest()->paginate(10);
+    return view('backend.products.index', compact('categories', 'products'))->with('i', (request()->input('page', 1) - 1) * 10);;
   }
 
   /**
