@@ -177,7 +177,7 @@
 <!-- JavaScript -->
 <script src="/assets/assets/js/bundle.js?ver=3.1.1"></script>
 <script src="/assets/assets/js/scripts.js?ver=3.1.1"></script>
-{{-- <script src="/assets/assets/js/custom.js"></script> --}}
+<script src="/assets/assets/js/custom.js"></script>
 <script src="/assets/assets/js/charts/chart-ecommerce.js?ver=3.1.1"></script>
 </body>
 

@@ -53,40 +53,12 @@
             <div class="nk-tb-list">
               <div class="nk-tb-item nk-tb-head">
                 <div class="nk-tb-col"></div>
-                {{-- <div class="nk-tb-col nk-tb-col-check">
-                  <div class="custom-control custom-control-sm custom-checkbox notext">
-                    <input type="checkbox" class="custom-control-input" id="pid">
-                    <label class="custom-control-label" for="pid"></label>
-                  </div>
-                </div> --}}
                 <div class="nk-tb-col tb-col-sm text-center"><span class="lead-text">Name</span></div>
                 <div class="nk-tb-col tb-col-md text-center"><span class="lead-text">Details</span></div>
                 <div class="nk-tb-col tb-col-md text-center"><span class="lead-text">Price</span></div>
                 <div class="nk-tb-col"><span class="lead-text">Stock</span></div>
                 <div class="nk-tb-col tb-col-md text-center"><span class="lead-text">Category</span></div>
                 <div class="nk-tb-col"><span class="lead-text">Action</span></div>
-                {{-- <div class="nk-tb-col nk-tb-col-tools">
-                  <ul class="nk-tb-actions gx-1 my-n1">
-                    <li class="me-n1">
-                      <div class="dropdown">
-                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em
-                            class="icon ni ni-more-h"></em></a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <ul class="link-list-opt no-bdr">
-                            <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit
-                                  Selected</span></a></li>
-                            <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove
-                                  Selected</span></a></li>
-                            <li><a href="#"><em class="icon ni ni-bar-c"></em><span>Update
-                                  Stock</span></a></li>
-                            <li><a href="#"><em class="icon ni ni-invest"></em><span>Update
-                                  Price</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div> --}}
               </div><!-- .nk-tb-item -->
               @foreach ($products as $product)
                 <div class="nk-tb-item">
@@ -102,7 +74,8 @@
                       <span class="title">{{ $product->product_name }}</span>
                     </span>
                   </div>
-                  <div class="nk-tb-col tb-col-md">{{ Str::limit($product->product_details, 50, '...') }}</div>
+                  <div class="nk-tb-col tb-col-md">{{ Str::limit($product->product_details, 50, '...') }}
+                  </div>
                   <div class="nk-tb-col tb-col-md">
                     <span class="tb-lead">Tk. {{ $product->product_price }}</span>
                   </div>
@@ -146,52 +119,8 @@
             </div><!-- .nk-tb-list -->
           </div>
           <div class="card-inner">
-            {{ $products->links('vendor.pagination.bootstrap-4') }}
-            {{-- <div class="nk-block-between-md g-3">
-              <div class="g">
-                <ul class="pagination justify-content-center justify-content-md-start">
-                  <li class="page-item"><a class="page-link" href="#"><em
-                        class="icon ni ni-chevrons-left"></em></a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><span class="page-link"><em class="icon ni ni-more-h"></em></span></li>
-                  <li class="page-item"><a class="page-link" href="#">6</a></li>
-                  <li class="page-item"><a class="page-link" href="#">7</a></li>
-                  <li class="page-item"><a class="page-link" href="#"><em
-                        class="icon ni ni-chevrons-right"></em></a></li>
-                </ul><!-- .pagination -->
-              </div>
-              <div class="g">
-                <div class="pagination-goto d-flex justify-content-center justify-content-md-start gx-3">
-                  <div>Page</div>
-                  <div>
-                    <select class="form-select js-select2" data-search="on" data-dropdown="xs center">
-                      <option value="page-1">1</option>
-                      <option value="page-2">2</option>
-                      <option value="page-4">4</option>
-                      <option value="page-5">5</option>
-                      <option value="page-6">6</option>
-                      <option value="page-7">7</option>
-                      <option value="page-8">8</option>
-                      <option value="page-9">9</option>
-                      <option value="page-10">10</option>
-                      <option value="page-11">11</option>
-                      <option value="page-12">12</option>
-                      <option value="page-13">13</option>
-                      <option value="page-14">14</option>
-                      <option value="page-15">15</option>
-                      <option value="page-16">16</option>
-                      <option value="page-17">17</option>
-                      <option value="page-18">18</option>
-                      <option value="page-19">19</option>
-                      <option value="page-20">20</option>
-                    </select>
-                  </div>
-                  <div>OF 102</div>
-                </div>
-              </div><!-- .pagination-goto -->
-            </div><!-- .nk-block-between --> --}}
+            {{-- Pagination --}}
+            {{ $products->links('vendor.pagination.dashlite') }}
           </div>
         </div>
       </div>
@@ -269,9 +198,8 @@
               </div>
             </div>
             <div class="col-12">
-              <button type="button" id="submit_btn" class="btn btn-primary"><em
-                  class="icon ni ni-plus"></em><span>Add
-                  New</span></button>
+              <button type="button" id="product_submit_btn" class="btn btn-primary"><em
+                  class="icon ni ni-plus"></em><span>Add New</span></button>
             </div>
           </div>
         </form>
@@ -279,11 +207,3 @@
     </div>
   </div>
 @endsection
-<script>
-  $(document).ready(function() {
-    $("#submit_btn").click(function() {
-      var form = $("#product_form");
-      alert(form.serialize());
-    });
-  });
-</script>
