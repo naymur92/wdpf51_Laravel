@@ -27,10 +27,11 @@ class ProductController extends Controller
    * @return \Illuminate\Http\Response
    */
 
-  // public function create()
-  // {
-  //   //
-  // }
+  public function create()
+  {
+    $categories = Category::get();
+    return view('backend.products.create', compact('categories'));
+  }
 
   /**
    * Store a newly created resource in storage.
@@ -40,6 +41,14 @@ class ProductController extends Controller
    */
   public function store(Request $request)
   {
+    $validation = $request->validate([
+      'product_name' => 'required|min:3',
+      'product_details' => 'min:5',
+      'product_price' => 'required|numeric',
+      'product_stock' => 'required|numeric',
+      'product_category' => 'required',
+    ]);
+
     $data['product_name'] = request('product_name');
     $data['product_details'] = request('product_details');
     $data['product_price'] = request('product_price');
@@ -48,8 +57,11 @@ class ProductController extends Controller
     $data['product_image'] = 'no_image.jpg';
     $data['created_at'] = date('Y-m-d H:i:s');
 
+    // // print_r($request->all());
+
     if (Product::insert($data)) {
-      return redirect('products');
+      return redirect('products')->with('msg', 'Product Added');
+      // echo "Successfully Added";
     }
   }
 

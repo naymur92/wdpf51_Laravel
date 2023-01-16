@@ -4,6 +4,26 @@
   <div class="nk-content-body">
     <div class="nk-block-head nk-block-head-sm">
       <div class="nk-block-between">
+
+        {{-- Display Error Message --}}
+        @if (session()->has('msg'))
+          <script>
+            function tempAlert(msg, duration) {
+              var el = document.createElement("div");
+              el.setAttribute('class', 'alert alert-success');
+              el.setAttribute("style", "position:absolute;top:10%;left:50%;width:150px;");
+              el.innerHTML = msg;
+              setTimeout(function() {
+                el.parentNode.removeChild(el);
+              }, duration);
+              document.body.appendChild(el);
+            }
+
+            tempAlert('{{ session()->get('msg') }}', 5000);
+          </script>
+        @endif
+
+
         <div class="nk-block-head-content">
           <h3 class="nk-block-title page-title">Products</h3>
         </div><!-- .nk-block-head-content -->
@@ -136,6 +156,15 @@
         </div>
       </div><!-- .nk-block-head -->
       <div class="nk-block">
+        @if ($errors->any())
+          <div class="alert alert-danger">
+            <ul>
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+        @endif
         <form id="product_form" action="{{ url('products') }}" method="post" enctype="multipart/form-data">
           <div class="row g-3">
             @csrf
