@@ -80,9 +80,13 @@
                 </div>
               </div>
               <div class="col-12">
-                <div class="upload-zone small bg-lighter my-2">
-                  <div class="dz-message">
-                    <span class="dz-message-text">Drag and drop file</span>
+                <div class="form-group">
+                  <label class="form-label" for="default-06">Product List</label>
+                  <div class="form-control-wrap">
+                    <div class="form-file">
+                      <input type="file" name="product_image" class="form-file-input" id="customFile">
+                      <label class="form-file-label" for="customFile">Choose file</label>
+                    </div>
                   </div>
                 </div>
               </div>

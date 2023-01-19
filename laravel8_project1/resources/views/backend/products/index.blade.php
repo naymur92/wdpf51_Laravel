@@ -84,8 +84,8 @@
                 <div class="nk-tb-item">
                   <div class="nk-tb-col nk-tb-col-check">
                     <div class="custom-control custom-control-sm custom-checkbox notext">
-                      <input type="checkbox" class="custom-control-input" id="pid1">
-                      <label class="custom-control-label" for="pid1"></label>
+                      <input type="checkbox" class="custom-control-input" id="pid<?= $product['id'] ?>">
+                      <label class="custom-control-label" for="pid<?= $product['id'] ?>"></label>
                     </div>
                   </div>
                   <div class="nk-tb-col tb-col-sm">
@@ -122,7 +122,8 @@
                             <ul class="link-list-opt no-bdr">
                               <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit
                                     Product</span></a></li>
-                              <li><a href="#"><em class="icon ni ni-eye"></em><span>View
+                              <li><a href="{{ route('products.show', $product['id']) }}"><em
+                                    class="icon ni ni-eye"></em><span>View
                                     Product</span></a></li>
                               <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product
                                     Orders</span></a></li>

@@ -41,12 +41,13 @@ class ProductController extends Controller
    */
   public function store(Request $request)
   {
-    $validation = $request->validate([
+    $request->validate([
       'product_name' => 'required|min:3',
       'product_details' => 'min:5',
       'product_price' => 'required|numeric',
       'product_stock' => 'required|numeric',
       'product_category' => 'required',
+      'product_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ]);
 
     $data['product_name'] = request('product_name');
@@ -54,7 +55,15 @@ class ProductController extends Controller
     $data['product_price'] = request('product_price');
     $data['product_stock'] = request('product_stock');
     $data['product_category'] = request('product_category');
-    $data['product_image'] = 'no_image.jpg';
+
+    if ($image = $request->file('product_image')) {
+      $fileName = time() . '.' . $image->extension();
+      $image->move(public_path('assets/images/products'), $fileName);
+      $data['product_image'] = $fileName;
+    } else {
+      $data['product_image'] = 'no_image.jpg';
+    }
+
     $data['created_at'] = date('Y-m-d H:i:s');
 
     // // print_r($request->all());
@@ -73,7 +82,7 @@ class ProductController extends Controller
    */
   public function show(Product $product)
   {
-    //
+    return view('backend.products.single', compact('product'));
   }
 
   /**
