@@ -11,7 +11,7 @@
             function tempAlert(msg, duration) {
               var el = document.createElement("div");
               el.setAttribute('class', 'alert alert-success');
-              el.setAttribute("style", "position:absolute;top:10%;left:50%;width:150px;");
+              el.setAttribute("style", "position:absolute;top:10%;left:50%;width:250px;text-align:center");
               el.innerHTML = msg;
               setTimeout(function() {
                 el.parentNode.removeChild(el);
@@ -78,14 +78,33 @@
                 <div class="nk-tb-col tb-col-md text-center"><span class="lead-text">Price</span></div>
                 <div class="nk-tb-col"><span class="lead-text">Stock</span></div>
                 <div class="nk-tb-col tb-col-md text-center"><span class="lead-text">Category</span></div>
-                <div class="nk-tb-col"><span class="lead-text">Action</span></div>
+                <div class="nk-tb-col nk-tb-col-tools">
+                  <ul class="nk-tb-actions gx-1 my-n1">
+                    <li class="me-n1">
+                      <div class="dropdown">
+                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em
+                            class="icon ni ni-more-h"></em></a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                          <ul class="link-list-opt no-bdr">
+                            <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit Selected</span></a></li>
+                            <li><a href="#" class="mult_pr_del"><em class="icon ni ni-trash"></em><span>Remove
+                                  Selected</span></a></li>
+                            <li><a href="#"><em class="icon ni ni-bar-c"></em><span>Update Stock</span></a></li>
+                            <li><a href="#"><em class="icon ni ni-invest"></em><span>Update Price</span></a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </div><!-- .nk-tb-item -->
               @foreach ($products as $product)
                 <div class="nk-tb-item">
                   <div class="nk-tb-col nk-tb-col-check">
                     <div class="custom-control custom-control-sm custom-checkbox notext">
-                      <input type="checkbox" class="custom-control-input" id="pid<?= $product['id'] ?>">
-                      <label class="custom-control-label" for="pid<?= $product['id'] ?>"></label>
+                      <input type="checkbox" class="custom-control-input" id="pid{{ $product['id'] }}"
+                        value="{{ $product['id'] }}">
+                      <label class="custom-control-label" for="pid{{ $product['id'] }}"></label>
                     </div>
                   </div>
                   <div class="nk-tb-col tb-col-sm">
@@ -120,15 +139,34 @@
                             data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                           <div class="dropdown-menu dropdown-menu-end">
                             <ul class="link-list-opt no-bdr">
-                              <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit
+                              <li><a href="{{ route('products.edit', $product['id']) }}"><em
+                                    class="icon ni ni-edit"></em><span>Edit
                                     Product</span></a></li>
                               <li><a href="{{ route('products.show', $product['id']) }}"><em
                                     class="icon ni ni-eye"></em><span>View
                                     Product</span></a></li>
                               <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Product
                                     Orders</span></a></li>
-                              <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove
-                                    Product</span></a></li>
+
+                              {{-- This part is for jQuery ajax --}}
+                              {{-- <meta name="csrf-token" content="{{ csrf_token() }}">
+                              <li><a href="{{ route('products.destroy', $product['id']) }}"
+                                  onclick="return confirm('Are You Sure want to delete?')" class="pr_del"><em
+                                    class="icon ni ni-trash"></em><span>Remove
+                                    Product</span></a></li> --}}
+
+                              {{-- This part is for form --}}
+                              <li>
+                                <form action="{{ route('products.destroy', $product['id']) }}"
+                                  onsubmit="return confirm('Are You Sure want to delete?')" method="post"
+                                  class="pr_del_form">
+                                  {{ method_field('DELETE') }}
+                                  @csrf
+                                  <a href="#" class="pr_del_sub"><em class="icon ni ni-trash"></em><span>Remove
+                                      Product</span></a>
+                                </form>
+
+                              </li>
                             </ul>
                           </div>
                         </div>

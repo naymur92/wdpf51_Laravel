@@ -85,10 +85,14 @@
                   <div class="form-control-wrap">
                     <div class="form-file">
                       <input type="file" name="product_image" class="form-file-input" id="customFile">
-                      <label class="form-file-label" for="customFile">Choose file</label>
+                      <label class="form-file-label" for="customFile" onchange="readURL(this)">Choose file</label>
                     </div>
                   </div>
                 </div>
+
+                <!-- Show selected photo -->
+                <img src="/assets/images/products/no_image.jpg" id="showSelectedPhoto" class="img-thumbnail mt-2"
+                  width="150px" alt="selected image">
               </div>
               <div class="col-12">
                 <button type="submit" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add

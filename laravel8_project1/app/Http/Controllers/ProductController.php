@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
 
@@ -93,7 +94,8 @@ class ProductController extends Controller
    */
   public function edit(Product $product)
   {
-    //
+    $categories = Category::get();
+    return view('backend.products.edit', compact('product', 'categories'));
   }
 
   /**
@@ -105,7 +107,43 @@ class ProductController extends Controller
    */
   public function update(Request $request, Product $product)
   {
-    //
+    // Old image filename
+    $old_img = $product->product_image;
+
+    $request->validate([
+      'product_name' => 'required|min:3',
+      'product_details' => 'min:5',
+      'product_price' => 'required|numeric',
+      'product_stock' => 'required|numeric',
+      'product_category' => 'required',
+      'product_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    $data['product_name'] = request('product_name');
+    $data['product_details'] = request('product_details');
+    $data['product_price'] = request('product_price');
+    $data['product_stock'] = request('product_stock');
+    $data['product_category'] = request('product_category');
+
+    if ($image = $request->file('product_image')) {
+      $fileName = time() . '.' . $image->extension();
+      $image->move(public_path('assets/images/products'), $fileName);
+      $data['product_image'] = $fileName;
+
+      // Delete old file
+      if ($old_img != 'no_image.jpg') {
+        unlink(public_path('assets/images/products/' . $old_img));
+      }
+    }
+
+    $data['updated_at'] = date('Y-m-d H:i:s');
+
+    // // // print_r($request->all());
+
+    if ($product->update($data)) {
+      return redirect('products')->with('msg', 'Product Updated');
+      // echo "Successfully Added";
+    }
   }
 
   /**
@@ -116,6 +154,16 @@ class ProductController extends Controller
    */
   public function destroy(Product $product)
   {
-    //
+    Product::find($product->id)->delete($product->id);
+
+    // // This is for ajax
+    // session()->flash('msg', 'Deleted Successfully!');
+    // // or
+    // // return response()->json([
+    // //   'success' => 'Record deleted successfully!'
+    // // ]);
+
+    // This is for form
+    return redirect('products')->with('msg', 'Successfully Deleted');
   }
 }
