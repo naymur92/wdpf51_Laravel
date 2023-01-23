@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\backend\LoginController;
+use App\Http\Controllers\frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Frontend
+Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::get('admin', [LoginController::class, 'login']);
+
+// Backend
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
