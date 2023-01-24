@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\showAge;
 use App\Http\Middleware\authAdmin;
 use App\Http\Middleware\CheckAge;
@@ -31,3 +32,18 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::middleware([authAdmin::class])->group(function () {
   Route::post('/authlogin', [LoginController::class, 'login']);
 });
+
+
+Route::get('/jobs', function () {
+  return view('jobs');
+});
+
+Route::get('/about', function () {
+  return view('about');
+});
+
+Route::get('/jobs-apply', function () {
+  return view('apply');
+});
+
+Route::get('/report', [ReportController::class, 'index']);
