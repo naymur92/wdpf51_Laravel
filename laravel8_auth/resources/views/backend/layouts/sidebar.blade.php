@@ -1,3 +1,47 @@
+<?php
+
+// set collapsed class
+function isCollapsed($controllerName)
+{
+    $c_con_array = explode('.', Route::currentRouteName());
+    $current_controller = $c_con_array[0];
+
+    if ($current_controller != $controllerName) {
+        echo 'collapsed';
+    }
+}
+
+// set active class in li tag
+function isActiveLI($controllerName)
+{
+    $c_con_array = explode('.', Route::currentRouteName());
+    $current_controller = $c_con_array[0];
+
+    if ($current_controller == $controllerName) {
+        echo 'active';
+    }
+}
+
+// set show class in a tag
+function isShow($controllerName)
+{
+    $c_con_array = explode('.', Route::currentRouteName());
+    $current_controller = $c_con_array[0];
+
+    if ($current_controller == $controllerName) {
+        echo 'show';
+    }
+}
+
+// set active class
+function isActive($routeName)
+{
+    if (Route::currentRouteName() == $routeName) {
+        echo 'active';
+    }
+}
+?>
+
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
@@ -12,23 +56,24 @@
   <hr class="sidebar-divider my-0">
 
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item active">
-    <a class="nav-link" href="{{ url('/') }}">
+  <li class="nav-item {{ isActiveLI('dashboard') }}">
+    <a class="nav-link" href="{{ url('dashboard') }}">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
 
   {{-- nav item, users --}}
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-      aria-controls="collapseTwo">
+  <li class="nav-item {{ isActiveLI('users') }}">
+    <a class="nav-link {{ isCollapsed('users') }}" href="#" data-toggle="collapse" data-target="#userMenu"
+      aria-expanded="true" aria-controls="userMenu">
       <i class="fas fa-fw fa-user"></i>
       <span>Users Area</span>
     </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div id="userMenu" class="collapse {{ isShow('users') }}" aria-labelledby="headingTwo"
+      data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="{{ url('users') }}">All Users</a>
-        <a class="collapse-item" href="cards.html">Add User</a>
+        <a class="collapse-item {{ isActive('users.index') }}" href="{{ url('users') }}">All Users</a>
+        <a class="collapse-item {{ isActive('users.create') }}" href="{{ route('users.create') }}">Add User</a>
       </div>
     </div>
   </li>
