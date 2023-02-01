@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\showAge;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\authAdmin;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,7 @@ Route::middleware([authAdmin::class])->group(function () {
   Route::post('/authlogin', [LoginController::class, 'login']);
 });
 
+Route::get('/users', [UserController::class, 'index']);
 
 Route::get('/jobs', function () {
   return view('jobs');
