@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\showAge;
@@ -35,6 +36,10 @@ Route::middleware([authAdmin::class])->group(function () {
 });
 
 Route::get('/users', [UserController::class, 'index']);
+Route::get('/roles', [UserController::class, 'showRoles']);
+Route::get('/roleassign', [UserController::class, 'roleAssign']);
+
+Route::get('/posts', [PostController::class, 'index']);
 
 Route::get('/jobs', function () {
   return view('jobs');

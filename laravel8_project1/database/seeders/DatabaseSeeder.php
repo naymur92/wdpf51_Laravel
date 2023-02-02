@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Phone;
+use App\Models\Post;
 use App\Models\Product;
+use App\Models\Role;
 use App\Models\User;
 use Faker\Core\Number;
 use Illuminate\Database\Seeder;
@@ -34,6 +37,13 @@ class DatabaseSeeder extends Seeder
     $user->remember_token = Str::random(10);
     $user->save();
 
+    $roles = ['superadmin', 'admin', 'manager', 'editor', 'contributor', 'subscriber', 'user'];
+    foreach ($roles as $role) {
+      $u_role = new Role();
+      $u_role->name = $role;
+      $u_role->save();
+    }
+
     // // has one
     // $phone = new Phone();
     // $phone->user_id = 1;
@@ -51,6 +61,22 @@ class DatabaseSeeder extends Seeder
       $phone->user_id = rand(1, 2);
       $phone->phone = rand(1558981652, 15697815415);
       $phone->save();
+    }
+
+
+    // post seeder
+    for ($i = 1; $i <= 15; $i++) {
+      $post = new Post();
+      $post->name = 'Sample Post - ' . $i;
+
+      $post->save();
+    }
+    for ($i = 1; $i <= 50; $i++) {
+      $comment = new Comment();
+      $comment->post_id = rand(1, 15);
+      $comment->comment = 'Comment - ' . $i;
+
+      $comment->save();
     }
 
     Product::factory()

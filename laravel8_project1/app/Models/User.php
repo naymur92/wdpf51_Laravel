@@ -42,13 +42,22 @@ class User extends Authenticatable
     'email_verified_at' => 'datetime',
   ];
 
+  // one to one
   // public function phones()
   // {
   //   return $this->hasOne(related: Phone::class, foreignKey: 'user_id');
   // }
 
+
+  // one to many
   public function phones()
   {
     return $this->hasMany(related: Phone::class, foreignKey: 'user_id');
+  }
+
+  // many to many
+  public function roles()
+  {
+    return $this->belongsToMany(Role::class, 'role_users');
   }
 }
