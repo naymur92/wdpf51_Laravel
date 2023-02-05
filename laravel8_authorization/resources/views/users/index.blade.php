@@ -49,6 +49,11 @@
       </tr>
     @endforeach
   </table>
-  {!! $data->render() !!}
-  <p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
+  <pre>
+    {{-- {{ $user->getRoleNames()->first() }} --}}
+    {{-- {{ Auth::user()->getRoleNames()->first() }} --}}
+    {{-- {{ Auth::user()->roles->first()->id }} --}}
+  </pre>
+  {!! $data->render('vendor.pagination.bootstrap-4') !!}
+  <p class="text-center text-primary"><small>Laravel Authentication & Authorization</small></p>
 @endsection

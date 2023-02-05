@@ -46,6 +46,6 @@
       </tr>
     @endforeach
   </table>
-  {!! $products->links() !!}
-  <p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
+  {!! $products->links('vendor.pagination.bootstrap-4') !!}
+  <p class="text-center text-primary"><small>Laravel 8 Authentication & Authorization</small></p>
 @endsection

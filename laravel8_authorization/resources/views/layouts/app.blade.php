@@ -37,8 +37,10 @@
               <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
               <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
             @else
-              <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
-              <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
+              @if (Auth::user()->getRoleNames()->first() == 'Admin')
+                <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
+                <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
+              @endif
               <li><a class="nav-link" href="{{ route('products.index') }}">Manage Product</a></li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
