@@ -1,0 +1,19 @@
+# for yahoo mail
+# MAIL_MAILER=smtp
+# MAIL_HOST=smtp.mail.yahoo.com
+# MAIL_PORT=587
+# MAIL_USERNAME=naymur92@yahoo.com
+# MAIL_PASSWORD=null
+# MAIL_ENCRYPTION=tls
+# MAIL_FROM_ADDRESS=naymur92@yahoo.com
+# MAIL_FROM_NAME="${APP_NAME}"
+
+# for gmail
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=465
+MAIL_USERNAME=naim.mict@gmail.com
+MAIL_PASSWORD=wlaqaefunarsqsot
+MAIL_ENCRYPTION=ssl
+MAIL_FROM_ADDRESS=naim.mict@gmail.com
+MAIL_FROM_NAME="Support Mail"

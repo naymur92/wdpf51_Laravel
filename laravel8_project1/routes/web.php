@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
@@ -54,3 +55,8 @@ Route::get('/jobs-apply', function () {
 });
 
 Route::get('/report', [ReportController::class, 'index']);
+
+Route::get('contact', [MailController::class, 'contactForm']);
+Route::post('contact', [MailController::class, 'sendMessage'])->name('sendmsg');
+
+Route::get('send-mail', [MailController::class, 'index']);
