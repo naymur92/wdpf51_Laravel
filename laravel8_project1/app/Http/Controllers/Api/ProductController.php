@@ -15,7 +15,8 @@ class ProductController extends Controller
    */
   public function index()
   {
-    $products = Product::orderBy('created_at', 'desc')->take(5)->get();
+    // $products = Product::orderBy('created_at', 'desc')->take(5)->get();
+    $products = Product::orderBy('created_at', 'desc')->get();
     return $products;
   }
   /**
