@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\DogsController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ProductSearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('dogs', DogsController::class);
 Route::apiResource('products', ProductController::class);
+Route::post('search', [ProductSearchController::class, 'search']);
