@@ -32,6 +32,7 @@ class ProductController extends Controller
    */
   public function store(Request $request)
   {
+    // return $request->all();
     $request->validate([
       'product_name' => 'required|min:3',
       'product_details' => 'min:5',
@@ -40,7 +41,9 @@ class ProductController extends Controller
       'product_category' => 'required',
     ]);
 
-    return Product::create($request->only(['product_name', 'product_details', 'product_price', 'product_stock', 'product_category']));
+    Product::create($request->only(['product_name', 'product_details', 'product_price', 'product_stock', 'product_category']));
+
+    return response()->json(['success' => true, 'msg' => 'Product Added Successfully']);
   }
 
   /**
@@ -61,18 +64,20 @@ class ProductController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Product $product)
+  public function update(Request $request, $id)
   {
+    $product = Product::findOrFail($id);
     $request->validate([
-      'product_name' => 'min:3',
+      'product_name' => 'required|min:3',
       'product_details' => 'min:5',
-      'product_price' => 'numeric',
-      'product_stock' => 'numeric',
+      'product_price' => 'required|numeric',
+      'product_stock' => 'required|numeric',
+      'product_category' => 'required',
     ]);
 
     $product->update($request->only(['product_name', 'product_details', 'product_price', 'product_stock', 'product_category']));
 
-    return $product;
+    return response()->json(['success' => true, 'msg' => 'Product Updated successfully.']);
   }
 
   /**
@@ -81,9 +86,10 @@ class ProductController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Product $product)
+  public function destroy($id)
   {
+    $product = Product::findOrFail($id);
     $product->delete();
-    return response()->json(['message' => 'Product deleted successfully.']);
+    return response()->json(['success' => true, 'msg' => 'Product deleted successfully.']);
   }
 }
