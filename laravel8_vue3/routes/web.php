@@ -20,3 +20,9 @@ Route::get('/', [FrontController::class, 'index']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/front-products', [FrontController::class, 'front_products']);
+
+Route::any('{slug}', function () {
+  return view('front');
+});

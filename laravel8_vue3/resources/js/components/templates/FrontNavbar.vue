@@ -3,27 +3,26 @@
     <div class="row">
       <div class="col-lg-3">
         <div class="header__logo">
-          <a href="./index.html"
+          <router-link to="/"
             ><img src="/front_assets/img/logo.png" alt=""
-          /></a>
+          /></router-link>
         </div>
       </div>
       <div class="col-lg-6">
         <nav class="header__menu">
           <ul>
-            <li class="active"><a href="./index.html">Home</a></li>
-            <li><a href="./shop-grid.html">Shop</a></li>
             <li>
-              <a href="#">Pages</a>
-              <ul class="header__menu__dropdown">
-                <li><a href="./shop-details.html">Shop Details</a></li>
-                <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                <li><a href="./checkout.html">Check Out</a></li>
-                <li><a href="./blog-details.html">Blog Details</a></li>
-              </ul>
+              <router-link to="/">Home</router-link>
             </li>
-            <li><a href="./blog.html">Blog</a></li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li>
+              <router-link to="/shop">Shop</router-link>
+            </li>
+            <li>
+              <router-link to="/blog">Blog</router-link>
+            </li>
+            <li>
+              <router-link to="/contact">Contact</router-link>
+            </li>
           </ul>
         </nav>
       </div>
