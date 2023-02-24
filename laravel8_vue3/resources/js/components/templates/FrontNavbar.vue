@@ -1,3 +1,6 @@
+<script setup>
+import Cart from "../Cart.vue";
+</script>
 <template>
   <div class="container">
     <div class="row">
@@ -27,17 +30,7 @@
         </nav>
       </div>
       <div class="col-lg-3">
-        <div class="header__cart">
-          <ul>
-            <li>
-              <a href="#"><i class="fa fa-heart"></i> <span>1</span></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
-            </li>
-          </ul>
-          <div class="header__cart__price">item: <span>$150.00</span></div>
-        </div>
+        <Cart />
       </div>
     </div>
     <div class="humberger__open">

@@ -1,5 +1,6 @@
 <script setup>
 import axios from "axios";
+import AddToCart from "../components/AddToCart.vue";
 </script>
 <template>
   <div>
@@ -323,9 +324,7 @@ import axios from "axios";
                       <li>
                         <a href="#"><i class="fa fa-retweet"></i></a>
                       </li>
-                      <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                      </li>
+                      <add-to-cart :prod-id="product.id"></add-to-cart>
                     </ul>
                   </div>
                   <div class="product__item__text">
@@ -351,7 +350,6 @@ import axios from "axios";
   </div>
 </template>
 <script>
-
 export default {
   data() {
     return {
