@@ -5,11 +5,12 @@ import axios from "axios";
   <div class="header__cart">
     <ul>
       <li>
-        <a href="#"><i class="fa fa-heart"></i> <span>1</span></a>
+        <a href="#"><i class="fa fa-heart"></i> <span>0</span></a>
       </li>
       <li>
-        <a href="#"
-          ><i class="fa fa-shopping-bag"></i> <span>{{ cart_count }}</span></a
+        <router-link to="/cart"
+          ><i class="fa fa-shopping-bag"></i>
+          <span>{{ cart_count }}</span></router-link
         >
       </li>
     </ul>
@@ -31,6 +32,9 @@ export default {
     getCartItems() {
       axios.get("/cart-items").then((res) => {
         // console.log(res.data);
+        if (res.data.not_logged_in) {
+          return;
+        }
         this.cart_items = res.data;
         this.cart_count = res.data.length;
         this.calculateTotalPrice();

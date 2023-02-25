@@ -20,6 +20,8 @@ export default {
           alert(res.data.msg);
         } else {
           alert(res.data.msg);
+
+          // if not logged in then redirect to login page
           if (res.data.error_login) {
             window.location.href = "/login";
           }

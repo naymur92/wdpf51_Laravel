@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -16,7 +17,10 @@ class CartController extends Controller
    */
   public function index()
   {
-    $cart_items = Cart::where('user_id', Auth::user()->id)->get();
+    if (!Auth::user()) {
+      return response()->json(['not_logged_in' => true]);
+    }
+    $cart_items = Cart::with('product')->where('user_id', Auth::user()->id)->get();
 
     return response()->json($cart_items);
   }
@@ -29,12 +33,12 @@ class CartController extends Controller
    */
   public function store(Request $request)
   {
-    $product_id = $request->product_id;
-    $user_id = Auth::user()->id;
-
-    if (!$user_id) {
+    if (!Auth::user()) {
       return response()->json(['error_login' => true, 'success' => false, 'msg' => 'Please login to continue']);
     }
+
+    $product_id = $request->product_id;
+    $user_id = Auth::user()->id;
 
     $product = Product::findOrFail($product_id);
 
@@ -47,7 +51,7 @@ class CartController extends Controller
         'quantity' => 1,
         'price' => $product->product_price,
         'user_id' => $user_id,
-        'create_at' => date("Y-m-d H:i:s")
+        'created_at' => date("Y-m-d H:i:s")
       ]);
     } else {
       // Increse product quantity in cart

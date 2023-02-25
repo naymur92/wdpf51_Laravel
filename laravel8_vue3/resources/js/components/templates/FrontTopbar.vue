@@ -1,3 +1,6 @@
+<script setup>
+import axios from "axios";
+</script>
 <template>
   <div class="header__top">
     <div class="container">
@@ -27,8 +30,13 @@
                 <li><a href="#">English</a></li>
               </ul>
             </div>
-            <div class="header__top__right__auth">
-              <a href="#"><i class="fa fa-user"></i> Login</a>
+            <div v-if="!auth_user.id" class="header__top__right__auth">
+              <a href="/login"><i class="fa fa-user"></i> Login</a>
+            </div>
+            <div v-if="auth_user.id" class="header__top__right__auth">
+              <a href="/logout" @click.prevent="logout()"
+                ><i class="fa fa-user"></i> Logout</a
+              >
             </div>
           </div>
         </div>
@@ -37,7 +45,25 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      auth_user: [],
+    };
+  },
+  mounted() {
+    axios.get("/check-auth").then((res) => {
+      this.auth_user = res.data;
+    });
+  },
+  methods: {
+    logout() {
+      axios.post("/logout").then((res) => {
+        window.location.reload();
+      });
+    },
+  },
+};
 </script>
 <style>
 </style>

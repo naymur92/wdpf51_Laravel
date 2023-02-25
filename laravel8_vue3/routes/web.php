@@ -23,6 +23,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/front-products', [FrontController::class, 'front_products']);
+Route::get('check-auth', [FrontController::class, 'check_auth']);
+
 Route::apiResource('cart-items', CartController::class);
 
 Route::any('{slug}', function () {
